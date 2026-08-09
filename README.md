@@ -1,99 +1,94 @@
-# Automation Anywhere — Playwright Test Suite
+# Multi-Agent AI Platform for ESG Compliance Auditing
 
-This repository contains end-to-end UI and API tests for Automation Anywhere using Playwright.
+An AI-powered multi-agent platform designed to assist with Environmental, Social, and Governance (ESG) compliance auditing by automating document analysis, requirement identification, evidence evaluation, and compliance assessment.
 
 ## Overview
 
-- **Use Case 1 (UI):** Create a Form via the web UI (login, Automation → Create → Form, add controls, upload file, save and verify).
-- **Use Case 2 (API):** Create a private workspace, create a form and a process via API, save content and dependencies.
+ESG compliance auditing requires organizations to review large volumes of policies, reports, regulatory documents, and supporting evidence against defined compliance requirements.
 
-## Setup
+This project explores a **multi-agent AI architecture** where specialized AI agents collaborate to streamline different stages of the ESG auditing workflow.
 
-1. Install Node.js (v18 recommended) and npm.
-2. Clone the repository and install dependencies:
+The platform is designed to:
 
-```bash
-git clone git@github.com:chandanambindu/automation-anywhere-sdet-framework.git
-cd automation-anywhere-sdet-framework
-npm ci
-npx playwright install --with-deps
-```
+- Analyze ESG-related documents
+- Identify relevant compliance requirements
+- Extract supporting evidence
+- Evaluate evidence against requirements
+- Identify potential compliance gaps
+- Generate structured audit findings
+- Provide an overall compliance assessment
 
-## Environment / Configuration
+## Key Features
 
-Create a local `.env` file (do not commit) with the following variables:
+### 🤖 Multi-Agent Architecture
 
-- `BASE_URL` — UI base URL
-- `API_BASE_URL` — API base URL
-- `USERNAME` — test user email
-- `PASSWORD` — test user password
-- Optional: `TEST_TIMEOUT_MS`, `EXPECT_TIMEOUT_MS`, `ACTION_TIMEOUT_MS`, `NAVIGATION_TIMEOUT_MS`, `RETRIES`, `BROWSER`, `HEADLESS`
+The platform divides the auditing workflow among specialized agents, allowing each agent to focus on a specific responsibility.
 
-Example `.env` (local only):
+Typical agent responsibilities include:
 
-```
-API_BASE_URL=https://community.cloud.automationanywhere.digital
-BASE_URL=https://www.automationanywhere.com/products/enterprise/community-edition
-USERNAME=you@example.com
-PASSWORD=supersecret
-HEADLESS=true
-```
+- **Document Analysis Agent** — Processes and analyzes uploaded documents.
+- **Requirement Analysis Agent** — Identifies applicable ESG requirements and audit criteria.
+- **Evidence Analysis Agent** — Extracts and evaluates evidence relevant to compliance requirements.
+- **Compliance Assessment Agent** — Determines whether requirements are satisfied based on the available evidence.
+- **Reporting Agent** — Organizes findings into a structured audit report.
 
-## CI/CD
+### 📄 Document Analysis
 
-GitHub Actions workflow at `.github/workflows/playwright.yml` uses repository secrets: `BASE_URL`, `API_BASE_URL`, `USERNAME`, `PASSWORD`.
+The system can process ESG-related documentation and identify information relevant to compliance requirements.
 
-## Running Tests Locally
+### 🔎 Evidence-Based Auditing
 
-```bash
-# Run full suite
-npm test
+Instead of relying solely on generated responses, the platform focuses on connecting compliance findings with supporting evidence from the analyzed documents.
 
-# Run UI tests only (Use Case 1)
-npm run test:ui
+### ⚠️ Compliance Gap Identification
 
-# Run API tests only (Use Case 2)
-npm run test:api
+The system can identify areas where available evidence may be insufficient or where requirements may not be fully satisfied.
 
-# View HTML report
-npm run report
-```
+### 📊 Audit Reporting
 
-## Manual Test Execution
+The platform organizes the results of the analysis into structured compliance findings that can assist auditors and organizations in reviewing ESG compliance.
 
-```bash
-# Use Case 1: UI test
-npx playwright test tests/ui/create-form.spec.js --project=chromium --workers=1
+## High-Level Workflow
 
-# Use Case 2: API test
-npx playwright test tests/api/create-process-with-form.spec.js --project=chromium --workers=1
-
-# Both together
-npx playwright test tests/ui/create-form.spec.js tests/api/create-process-with-form.spec.js --project=chromium --workers=1
-
-# With headed mode (see browser for UI test)
-npx playwright test tests/ui/create-form.spec.js --project=chromium --workers=1 --headed
-```
-
-## Test Organization
-
-Tests are organized under `tests/ui/` and `tests/api/` with `Use Case` prefixes in titles.
-
-## Frameworks & Tools
-
-- Playwright Test (`@playwright/test`) for browser automation and API test orchestration
-- Node.js (CommonJS) runtime
-- `dotenv` for environment loading
-- Page Object Model pattern for UI interactions
-- Layered API client structure
-
-## Repository Notes
-
-- Do not commit `.env` files containing credentials
-- Debug artifacts (e.g., `tmp-*.png`, `debug-*.js`) are in `.gitignore`
-- Rotate credentials if accidentally committed
-
-## Authorship
-
-Prepared as part of the Automation Anywhere SDET assignment.
+```text
+                 ┌──────────────────────┐
+                 │   ESG Documents      │
+                 │ Policies / Reports   │
+                 │ Evidence / Records   │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │ Document Analysis    │
+                 │       Agent          │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │ Requirement         │
+                 │ Analysis Agent      │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │ Evidence Analysis   │
+                 │       Agent         │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │ Compliance          │
+                 │ Assessment Agent    │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │ Reporting Agent     │
+                 └──────────┬───────────┘
+                            │
+                            ▼
+                 ┌──────────────────────┐
+                 │ ESG Audit Report    │
+                 │ & Compliance Gaps   │
+                 └──────────────────────┘
 
